@@ -1,0 +1,91 @@
+{
+    "name": "electron-forge-react",
+    "productName": "electron-forge-react",
+    "version": "1.0.0",
+    "description": "",
+    "main": ".webpack/main",
+    "scripts":
+    {
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make",
+        "publish": "electron-forge publish",
+        "lint": "echo \"No linting configured\""
+    },
+    "keywords": [],
+    "author":
+    {
+        "name": "aegooby",
+        "email": "aegooby@gmail.com"
+    },
+    "license": "MIT",
+    "config":
+    {
+        "forge":
+        {
+            "packagerConfig": { "icon": "./src/icon.icns" },
+            "makers":
+            [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": { "name": "electron-forge-react" }
+                },
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [ "darwin" ]
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {}
+                },
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {}
+                }
+            ],
+            "plugins":
+            [
+                [
+                    "@electron-forge/plugin-webpack",
+                    {
+                        "mainConfig": "./webpack.main.config.js",
+                        "renderer":
+                        {
+                            "config": "./webpack.renderer.config.js",
+                            "entryPoints":
+                            [
+                                {
+                                    "html": "./src/index.html",
+                                    "js": "./src/renderer.jsx",
+                                    "name": "main_window"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            ]
+        }
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "6.0.0-beta.52",
+        "@electron-forge/maker-deb": "6.0.0-beta.52",
+        "@electron-forge/maker-rpm": "6.0.0-beta.52",
+        "@electron-forge/maker-squirrel": "6.0.0-beta.52",
+        "@electron-forge/maker-zip": "6.0.0-beta.52",
+        "@electron-forge/plugin-webpack": "6.0.0-beta.52",
+        "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+        "css-loader": "^3.0.0",
+        "electron": "10.0.0",
+        "node-loader": "^0.6.0",
+        "style-loader": "^0.23.1"
+    },
+    "dependencies": {
+        "@babel/core": "^7.11.4",
+        "@babel/preset-env": "^7.11.0",
+        "@babel/preset-react": "^7.10.4",
+        "babel-loader": "^8.1.0",
+        "electron-squirrel-startup": "^1.0.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    }
+}
