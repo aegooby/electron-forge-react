@@ -4,24 +4,23 @@
     "version": "1.0.0",
     "description": "",
     "main": ".webpack/main",
-    "scripts":
-    {
+    "scripts": {
         "start": "electron-forge start",
         "package": "electron-forge package",
         "make": "electron-forge make",
         "publish": "electron-forge publish",
         "lint": "echo \"No linting configured\""
     },
-    "keywords": [  ],
-    "author":
-    {
+    "keywords": [],
+    "author": {
         "name": "aegooby",
         "email": "aegooby@gmail.com"
     },
     "license": "MIT",
-    "config": { "forge": "./forge.config.js" },
-    "devDependencies":
-    {
+    "config": {
+        "forge": "./forge.config.js"
+    },
+    "devDependencies": {
         "@electron-forge/cli": "6.0.0-beta.52",
         "@electron-forge/maker-deb": "6.0.0-beta.52",
         "@electron-forge/maker-rpm": "6.0.0-beta.52",
@@ -34,14 +33,14 @@
         "node-loader": "^0.6.0",
         "style-loader": "^0.23.1"
     },
-    "dependencies":
-    {
+    "dependencies": {
         "@babel/core": "^7.11.4",
         "@babel/preset-env": "^7.11.0",
         "@babel/preset-react": "^7.10.4",
         "babel-loader": "^8.1.0",
         "electron-squirrel-startup": "^1.0.0",
         "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react-dom": "^16.13.1",
+        "react-hot-loader": "^4.12.21"
     }
 }
