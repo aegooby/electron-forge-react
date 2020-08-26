@@ -1,9 +1,14 @@
 
-import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
-import { app, BrowserWindow, nativeImage } from "electron";
+import isSquirrel from "electron-squirrel-startup";
+// import installExtension from "electron-devtools-installer";
+import unzip from "unzip-crx-3";
+import { app, BrowserWindow, session, nativeImage } from "electron";
 import path from "path";
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
+const reactDevtoolsCrx = path.join(__dirname, "../../react-devtools.crx");
+const reactDevtools = path.join(__dirname, "react-devtools");
 
 const iconPath = path.join(__dirname, "icon.png");
 var iconImage = nativeImage.createFromPath(iconPath);
@@ -12,10 +17,9 @@ app.dock.setIcon(iconImage);
 
 let mainWindow;
 
-if (require("electron-squirrel-startup"))
-    app.quit();
+if (isSquirrel) app.quit();
 
-async function ready()
+async function createWindow()
 {
     const windowPreferences =
     {
@@ -31,11 +35,14 @@ async function ready()
     mainWindow = new BrowserWindow(windowPreferences);
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-    console.log("  ℹ️   adding react-devtools...");
+    await session.defaultSession.loadExtension(reactDevtools);
+}
 
-    await installExtension(REACT_DEVELOPER_TOOLS)
-        .then(function() { console.log("  ✅   added react-devtools") })
-        .catch(function(error) { console.error("  ⛔   error: ", error) });
+function ready()
+{
+    unzip(reactDevtoolsCrx, reactDevtools)
+        .then(function() { createWindow(); })
+        .catch(function(error) { console.error(error); });
 };
 
 app.on("ready", ready);

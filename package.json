@@ -30,9 +30,9 @@
         "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
         "css-loader": "^3.0.0",
         "electron": "10.0.0",
-        "electron-devtools-installer": "^3.1.1",
         "node-loader": "^0.6.0",
-        "style-loader": "^0.23.1"
+        "style-loader": "^0.23.1",
+        "unzip-crx-3": "^0.2.0"
     },
     "dependencies": {
         "@babel/core": "^7.11.4",
