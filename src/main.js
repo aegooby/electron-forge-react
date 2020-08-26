@@ -1,14 +1,16 @@
 
 import isSquirrel from "electron-squirrel-startup";
-// import installExtension from "electron-devtools-installer";
 import unzip from "unzip-crx-3";
 import { app, BrowserWindow, session, nativeImage } from "electron";
 import path from "path";
+import fs from "fs";
+
+if (isSquirrel) app.quit();
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
-const reactDevtoolsCrx = path.join(__dirname, "../../react-devtools.crx");
-const reactDevtools = path.join(__dirname, "react-devtools");
+const reactDevtoolsCrx = path.join(__dirname, "../../extensions/react-devtools.crx");
+const reactDevtools = path.join(__dirname, "../../extensions/react-devtools");
 
 const iconPath = path.join(__dirname, "icon.png");
 var iconImage = nativeImage.createFromPath(iconPath);
@@ -16,8 +18,6 @@ iconImage.isMacTemplateImage = true;
 app.dock.setIcon(iconImage);
 
 let mainWindow;
-
-if (isSquirrel) app.quit();
 
 async function createWindow()
 {
@@ -40,9 +40,20 @@ async function createWindow()
 
 function ready()
 {
-    unzip(reactDevtoolsCrx, reactDevtools)
-        .then(function() { createWindow(); })
-        .catch(function(error) { console.error(error); });
+    function unzipCrx()
+    {
+        unzip(reactDevtoolsCrx, reactDevtools)
+            .then(function() { createWindow(); })
+            .catch(function(error) { console.error(error); });
+    }
+    function accessHandler(error)
+    {
+        if (error)
+            unzipCrx();
+        else
+            createWindow();
+    }
+    fs.access(reactDevtools, accessHandler);
 };
 
 app.on("ready", ready);
