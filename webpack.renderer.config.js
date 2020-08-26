@@ -1,14 +1,20 @@
 const rules = require("./webpack.rules");
 
-rules.push({
+const cssRules =
+{
     test: /\.css$/,
     use: [{ loader: "style-loader" }, { loader: "css-loader" }],
-});
+};
 
-rules.push({
+rules.push(cssRules);
+
+const jsxRules =
+{
     test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [{ loader: "babel-loader" }]
-})
+};
+
+rules.push(jsxRules);
 
 module.exports = { module: { rules, }, };
