@@ -31,7 +31,11 @@ async function ready()
     mainWindow = new BrowserWindow(windowPreferences);
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-    await installExtension(REACT_DEVELOPER_TOOLS);
+    console.log("  ℹ️   adding react-devtools...");
+
+    await installExtension(REACT_DEVELOPER_TOOLS)
+        .then(function() { console.log("  ✅   added react-devtools") })
+        .catch(function(error) { console.error("  ⛔   error: ", error) });
 };
 
 app.on("ready", ready);
