@@ -1,9 +1,9 @@
-const { app, BrowserWindow, session, nativeImage } = require("electron");
-const path = require("path");
+
+import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+import { app, BrowserWindow, nativeImage } from "electron";
+import path from "path";
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
-
-const reactDevtools = path.join(__dirname, "../../react-devtools");
 
 const iconPath = path.join(__dirname, "icon.png");
 var iconImage = nativeImage.createFromPath(iconPath);
@@ -31,7 +31,7 @@ async function ready()
     mainWindow = new BrowserWindow(windowPreferences);
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-    await session.defaultSession.loadExtension(reactDevtools);
+    await installExtension(REACT_DEVELOPER_TOOLS);
 };
 
 app.on("ready", ready);
