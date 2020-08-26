@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { hot } from "react-hot-loader";
 
-class App extends Component
+class Text extends Component
 {
     render()
     {
@@ -11,6 +11,14 @@ class App extends Component
     }
 }
 
-export default hot(module)(App);
+class Main extends Component
+{
+    render()
+    {
+        return(<div><Text /></div>);
+    }
+}
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+export default hot(module)(Main);
+
+ReactDOM.render(<Main />, document.querySelector("#root"));
