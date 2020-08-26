@@ -12,61 +12,16 @@
         "publish": "electron-forge publish",
         "lint": "echo \"No linting configured\""
     },
-    "keywords": [],
+    "keywords": [  ],
     "author":
     {
         "name": "aegooby",
         "email": "aegooby@gmail.com"
     },
     "license": "MIT",
-    "config":
+    "config": { "forge": "./forge.config.js" },
+    "devDependencies":
     {
-        "forge":
-        {
-            "packagerConfig": { "icon": "./src/icon.icns" },
-            "makers":
-            [
-                {
-                    "name": "@electron-forge/maker-squirrel",
-                    "config": { "name": "electron-forge-react" }
-                },
-                {
-                    "name": "@electron-forge/maker-zip",
-                    "platforms": [ "darwin" ]
-                },
-                {
-                    "name": "@electron-forge/maker-deb",
-                    "config": {}
-                },
-                {
-                    "name": "@electron-forge/maker-rpm",
-                    "config": {}
-                }
-            ],
-            "plugins":
-            [
-                [
-                    "@electron-forge/plugin-webpack",
-                    {
-                        "mainConfig": "./webpack.main.config.js",
-                        "renderer":
-                        {
-                            "config": "./webpack.renderer.config.js",
-                            "entryPoints":
-                            [
-                                {
-                                    "html": "./src/index.html",
-                                    "js": "./src/renderer.jsx",
-                                    "name": "main_window"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            ]
-        }
-    },
-    "devDependencies": {
         "@electron-forge/cli": "6.0.0-beta.52",
         "@electron-forge/maker-deb": "6.0.0-beta.52",
         "@electron-forge/maker-rpm": "6.0.0-beta.52",
@@ -79,7 +34,8 @@
         "node-loader": "^0.6.0",
         "style-loader": "^0.23.1"
     },
-    "dependencies": {
+    "dependencies":
+    {
         "@babel/core": "^7.11.4",
         "@babel/preset-env": "^7.11.0",
         "@babel/preset-react": "^7.10.4",
