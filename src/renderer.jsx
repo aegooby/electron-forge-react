@@ -1,7 +1,10 @@
+
+import { hot } from "react-hot-loader";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { hot } from "react-hot-loader";
+
+const hotLoader = hot(module);
 
 class Text extends Component
 {
@@ -19,6 +22,6 @@ class Main extends Component
     }
 }
 
-export default hot(module)(Main);
+export default hotLoader(Main);
 
 ReactDOM.render(<Main />, document.querySelector("#root"));
