@@ -1,12 +1,12 @@
 
-import { hot } from "react-hot-loader";
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import * as ReactHotLoader from "react-hot-loader";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import "./index.css";
 
-const hotLoader = hot(module);
+const hotLoader = ReactHotLoader.hot(module);
 
-class Text extends Component
+class Text extends React.Component
 {
     render()
     {
@@ -14,7 +14,7 @@ class Text extends Component
     }
 }
 
-class Main extends Component
+class Main extends React.Component
 {
     render()
     {
