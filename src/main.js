@@ -1,11 +1,13 @@
 
-import isSquirrel from "electron-squirrel-startup";
-import unzip from "unzip-crx-3";
-import { app, BrowserWindow, session, nativeImage } from "electron";
-import path from "path";
-import fs from "fs";
+import * as isSquirrel from "electron-squirrel-startup";
+import * as unzip from "unzip-crx-3";
+import * as electron from "electron";
+import * as path from "path";
+import * as fs from "fs";
 
-if (isSquirrel) app.quit();
+const fsAsync = fs.promises;
+
+if (isSquirrel) electron.app.quit();
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
@@ -13,63 +15,69 @@ const reactDevtoolsCrx = path.join(__dirname, "../../extensions/react-devtools.c
 const reactDevtools = path.join(__dirname, "../../extensions/react-devtools");
 
 const iconPath = path.join(__dirname, "icon.png");
-var iconImage = nativeImage.createFromPath(iconPath);
+var iconImage = electron.nativeImage.createFromPath(iconPath);
 iconImage.isMacTemplateImage = true;
-app.dock.setIcon(iconImage);
+electron.app.dock.setIcon(iconImage);
 
 let mainWindow;
 
-async function createWindow()
+async function unzipCrx()
 {
-    const windowPreferences =
-    {
-        width: 800,
-        height: 600,
-        minHeight: 600,
-        minWidth: 800,
-        frame: false,
-        webPreferences: { nodeIntegration: true },
-        titleBarStyle: "hiddenInset",
-        icon: iconImage,
-    };
-    mainWindow = new BrowserWindow(windowPreferences);
-    mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-
-    await session.defaultSession.loadExtension(reactDevtools);
+    try { await unzip(reactDevtoolsCrx, reactDevtools); }
+    catch (error) { console.error(error); }
 }
 
-function ready()
+async function createWindow()
 {
-    function unzipCrx()
+    try
     {
-        unzip(reactDevtoolsCrx, reactDevtools)
-            .then(function() { createWindow(); })
-            .catch(function(error) { console.error(error); });
+        const windowPreferences =
+        {
+            width: 800,
+            height: 600,
+            minHeight: 600,
+            minWidth: 800,
+            frame: false,
+            webPreferences: { nodeIntegration: true },
+            titleBarStyle: "hiddenInset",
+            icon: iconImage,
+        };
+        mainWindow = new electron.BrowserWindow(windowPreferences);
+        mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+        await electron.session.defaultSession.loadExtension(reactDevtools);
     }
-    function accessHandler(error)
+    catch (error) { console.error(error); }
+}
+
+async function ready()
+{
+    try
     {
-        if (error)
-            unzipCrx();
-        else
-            createWindow();
+        await fsAsync.access(reactDevtools);
+        createWindow();
     }
-    fs.access(reactDevtools, accessHandler);
+    catch (error)
+    {
+        await unzipCrx();
+        createWindow();
+    }
 };
 
-app.on("ready", ready);
+electron.app.on("ready", ready);
 
 function windowAllClosed()
 {
     if (process.platform !== "darwin")
-        app.quit();
+        electron.app.quit();
 }
 
-app.on("window-all-closed", windowAllClosed);
+electron.app.on("window-all-closed", windowAllClosed);
 
 function activate()
 {
-    if (BrowserWindow.getAllWindows().length === 0)
+    if (electron.BrowserWindow.getAllWindows().length === 0)
         createWindow();
 }
 
-app.on("activate", activate);
+electron.app.on("activate", activate);
