@@ -1,46 +1,58 @@
-import { app, BrowserWindow } from 'electron';
+
+import * as electron from "electron";
+import * as path from "path";
+
+import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
+if (require("electron-squirrel-startup")) // eslint-disable-line global-require
+    electron.app.quit();
+
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
+const icon_path = path.join(__dirname, "icon.png");
+const icon_image = electron.nativeImage.createFromPath(icon_path);
+icon_image.isMacTemplateImage = true;
+electron.app.dock.setIcon(icon_image);
+
+async function ready() {
+    try {
+        await installExtension(REACT_DEVELOPER_TOOLS);
+        create_window();
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
-const createWindow = (): void => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-  });
+function create_window() {
+    const window_preferences =
+    {
+        width: 800,
+        height: 600,
+        minHeight: 600,
+        minWidth: 800,
+        frame: false,
+        titleBarStyle: "hiddenInset" as const,
+        webContents: { contextIsolation: false },
+        icon: icon_image,
+    };
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    const main_window = new electron.BrowserWindow(window_preferences);
+    main_window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+}
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-};
+electron.app.on("ready", ready);
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+function window_all_closed(): void {
+    if (process.platform !== "darwin")
+        electron.app.quit();
+}
+electron.app.on("window-all-closed", window_all_closed);
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+function activate(): void {
+    if (electron.BrowserWindow.getAllWindows().length === 0)
+        create_window();
+}
+electron.app.on("activate", activate);

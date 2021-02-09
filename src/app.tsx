@@ -8,7 +8,7 @@ const hotLoader = ReactHotLoader.hot(module);
 
 class Text extends React.Component {
     render() {
-        return (<h1 className="main-text">wahooey</h1>);
+        return (<h1 className="main-text">P'enises in my A'nuses</h1>);
     }
 }
 
