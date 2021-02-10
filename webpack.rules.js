@@ -1,9 +1,12 @@
 module.exports = [
-    // Add support for native node modules
-    {
-        test: /\.node$/,
-        use: "node-loader",
-    },
+    /** @note This breaks native modules. */
+    // {
+    //     test: /\.node$/,
+    //     loader: "node-loader",
+    //     options: {
+    //         flags: os.constants.dlopen.RTLD_NOW,
+    //     }
+    // },
     {
         test: /\.(m?js|node)$/,
         parser: { amd: false },
