@@ -6,14 +6,18 @@ import "./index.css";
 
 const hotLoader = ReactHotLoader.hot(module);
 
-class Text extends React.Component {
-    render() {
-        return (<h1 className="main-text">title</h1>);
+class Text extends React.Component
+{
+    render()
+    {
+        return (<h1 className="main-text">text</h1>);
     }
 }
 
-class Main extends React.Component {
-    render() {
+class Main extends React.Component
+{
+    render()
+    {
         return (<div><Text /></div>);
     }
 }
