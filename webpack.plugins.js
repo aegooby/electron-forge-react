@@ -1,3 +1,4 @@
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+/** @note Causes bugs on exit, disable for now. */
+// const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
-module.exports = [ new ForkTsCheckerWebpackPlugin() ];
+module.exports = [];
