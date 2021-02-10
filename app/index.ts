@@ -2,11 +2,9 @@
 import * as electron from "electron";
 import * as path from "path";
 
-import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
-
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
-if (require("electron-squirrel-startup")) // eslint-disable-line global-require
+if (require("electron-squirrel-startup"))
     electron.app.quit();
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
@@ -16,12 +14,14 @@ const icon_image = electron.nativeImage.createFromPath(icon_path);
 icon_image.isMacTemplateImage = true;
 electron.app.dock.setIcon(icon_image);
 
+const react_devtools = path.join(__dirname, "../../extensions/react-devtools");
+
 async function ready()
 {
     try
     {
-        await installExtension(REACT_DEVELOPER_TOOLS);
         create_window();
+        await electron.session.defaultSession.loadExtension(react_devtools);
     }
     catch (error)
     {
