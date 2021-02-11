@@ -88,5 +88,9 @@ typings/
 # Electron-Forge
 out/
 
+# Lockfiles
 yarn.lock
 package-lock.json
+
+# Extensions
+react-devtools/
