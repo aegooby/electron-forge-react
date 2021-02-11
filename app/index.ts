@@ -17,12 +17,12 @@ icon_image.isMacTemplateImage = true;
 electron.app.dock.setIcon(icon_image);
 
 const extensions_dir = path.join(__dirname, "../../extensions");
-const devtools_zip = path.join(extensions_dir, "react-devtools.zip");
-const devtools_dir = path.join(extensions_dir, "react-devtools");
+const react_devtools_zip = path.join(extensions_dir, "react-devtools.zip");
+const react_devtools_dir = path.join(extensions_dir, "react-devtools");
 
 async function unzip_devtools(): Promise<void>
 {
-    const buffer = await fs.promises.readFile(path.resolve(devtools_zip));
+    const buffer = await fs.promises.readFile(path.resolve(react_devtools_zip));
     const zip = await jszip.loadAsync(buffer);
     const keys = Object.keys(zip.files);
     async function unzip(filename: string): Promise<void>
@@ -41,12 +41,12 @@ async function unzip_devtools(): Promise<void>
 
 async function ready(): Promise<void>
 {
-    try { await fs.promises.access(devtools_dir); }
+    try { await fs.promises.access(react_devtools_dir); }
     catch (error) { await unzip_devtools(); }
     try
     {
         create_window();
-        await electron.session.defaultSession.loadExtension(devtools_dir);
+        await electron.session.defaultSession.loadExtension(react_devtools_dir);
     }
     catch (error) { console.log(error); }
 }
