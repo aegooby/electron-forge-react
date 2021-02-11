@@ -81,6 +81,7 @@
         "eslint": "^7.6.0",
         "eslint-plugin-import": "^2.20.0",
         "fork-ts-checker-webpack-plugin": "^5.0.14",
+        "jszip": "^3.6.0-0",
         "node-loader": "^1.0.1",
         "react-hot-loader": "^4.13.0",
         "style-loader": "^1.2.1",
