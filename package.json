@@ -5,6 +5,9 @@
     "description": "My Electron application description",
     "main": ".webpack/main",
     "scripts": {
+        "setup": "",
+        "clean": "rm -rf .webpack && rm -rf extensions/react-devtools/",
+        "build": "",
         "start": "electron-forge start",
         "package": "electron-forge package",
         "make": "electron-forge make",
