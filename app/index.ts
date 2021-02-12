@@ -62,7 +62,7 @@ function create_window(): void
         minWidth: 800,
         frame: false,
         titleBarStyle: "hiddenInset" as const,
-        webContents: { contextIsolation: true },
+        webPreferences: { contextIsolation: true },
         icon: icon_image,
     };
 
