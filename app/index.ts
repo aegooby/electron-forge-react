@@ -62,6 +62,7 @@ function create_window(): void
         minWidth: 800,
         frame: false,
         titleBarStyle: "hiddenInset" as const,
+        /** @todo Security flaw. */
         webPreferences:
         {
             contextIsolation: false,
