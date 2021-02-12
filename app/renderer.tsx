@@ -4,13 +4,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "./index.css";
 
-const hotLoader = ReactHotLoader.hot(module);
+const hot_loader = ReactHotLoader.hot(module);
 
 class Text extends React.Component
 {
     render()
     {
-        return (<h1 className="main-text">text</h1>);
+        return (<h1 className="main-text">P'enises in my A'nuses</h1>);
     }
 }
 
@@ -22,6 +22,6 @@ class Main extends React.Component
     }
 }
 
-export default hotLoader(Main);
+export default hot_loader(Main);
 
 ReactDOM.render(<Main />, document.querySelector("#root"));
