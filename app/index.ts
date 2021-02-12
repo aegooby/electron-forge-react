@@ -57,10 +57,10 @@ function create_window(): void
 {
     const window_preferences =
     {
-        width: 800,
-        height: 600,
-        minHeight: 600,
-        minWidth: 800,
+        width: 1366,
+        height: 768,
+        minWidth: 1024,
+        minHeight: 576,
         frame: false,
         titleBarStyle: "hiddenInset" as const,
         webPreferences:
