@@ -1,9 +1,9 @@
 
+import * as Electron from "electron";
+
 import * as path from "path";
 import * as fs from "fs";
 import * as jszip from "jszip";
-
-import * as Electron from "electron";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
