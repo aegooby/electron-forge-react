@@ -90,3 +90,9 @@ function activate(): void
         create_window();
 }
 Electron.app.on("activate", activate);
+
+function button(): void
+{
+    console.log("Button clicked");
+}
+Electron.ipcMain.on("button", button);
