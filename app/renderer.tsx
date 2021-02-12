@@ -10,7 +10,7 @@ class Text extends React.Component
 {
     render()
     {
-        return (<h1 className="main-text">P'enises in my A'nuses</h1>);
+        return (<h1 className="main-text">text</h1>);
     }
 }
 
