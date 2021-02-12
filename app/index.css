@@ -24,6 +24,8 @@ body
 .title-bar
 {
     -webkit-app-region: drag !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
 
     display: flex;
     position: fixed;
