@@ -61,7 +61,7 @@ function create_window(): void
         height: 600,
         minHeight: 600,
         minWidth: 800,
-        frame: false,
+        frame: true,
         titleBarStyle: "hiddenInset" as const,
         webPreferences:
         {
