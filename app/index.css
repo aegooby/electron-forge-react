@@ -67,3 +67,8 @@ button:hover
     border-radius: 5px;
     color: black;
 }
+button:focus 
+{
+    outline: 0;
+}
+
