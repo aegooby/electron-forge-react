@@ -6,6 +6,7 @@ import * as fs from "fs";
 import * as jszip from "jszip";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 if (require("electron-squirrel-startup"))
     Electron.app.quit();
@@ -62,11 +63,11 @@ function create_window(): void
         minWidth: 800,
         frame: false,
         titleBarStyle: "hiddenInset" as const,
-        /** @todo Security flaw. */
         webPreferences:
         {
-            contextIsolation: false,
-//             nodeIntegration: true
+            contextIsolation: true,
+            nodeIntegration: false,
+            preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
         },
         icon: icon_image,
     };
@@ -90,9 +91,3 @@ function activate(): void
         create_window();
 }
 Electron.app.on("activate", activate);
-
-function button(): void
-{
-    console.log("Button clicked");
-}
-Electron.ipcMain.on("button", button);
