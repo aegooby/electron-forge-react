@@ -66,7 +66,7 @@ function create_window(): void
         webPreferences:
         {
             contextIsolation: false,
-            nodeIntegration: true
+//             nodeIntegration: true
         },
         icon: icon_image,
     };
