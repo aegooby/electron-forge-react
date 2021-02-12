@@ -56,7 +56,10 @@
                                 {
                                     "html": "./app/index.html",
                                     "js": "./app/renderer.tsx",
-                                    "name": "main_window"
+                                    "name": "main_window",
+                                    "preload": {
+                                        "js": "./app/preload.ts"
+                                    }
                                 }
                             ]
                         }
