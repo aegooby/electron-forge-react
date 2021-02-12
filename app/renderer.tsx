@@ -24,11 +24,19 @@ class Button extends React.Component
     }
 }
 
+class TitleBar extends React.Component
+{
+    render(): JSX.Element
+    {
+        return (<div className="title-bar"></div>);
+    }
+}
+
 class Main extends React.Component
 {
-    render()
+    render(): JSX.Element
     {
-        return (<div><Button /></div>);
+        return (<><TitleBar /><Button /></>);
     }
 }
 
