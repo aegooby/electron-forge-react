@@ -2,6 +2,7 @@
 import * as ReactHotLoader from "react-hot-loader";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+
 import "./index.css";
 
 const hot_loader = ReactHotLoader.hot(module);
