@@ -92,7 +92,7 @@ function activate(): void
 }
 Electron.app.on("activate", activate);
 
-function button(): void
+async function button(): Promise<void>
 {
     console.log("Click!");
 }
