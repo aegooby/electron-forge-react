@@ -2,7 +2,6 @@
 import * as ReactHotLoader from "react-hot-loader";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as Electron from "electron";
 
 import "./index.css";
 
@@ -17,7 +16,7 @@ class Button extends React.Component
     }
     onClick(): void
     {
-        Electron.ipcRenderer.send("button");
+        window.Electron.ipcRenderer.send("button");
     }
     render(): JSX.Element
     {
