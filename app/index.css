@@ -1,5 +1,6 @@
 
-body {
+body 
+{
     display: flex;
     margin: auto;
     width: 100%;
@@ -9,6 +10,33 @@ body {
     align-items: center;
 }
 
-.main-text {
+button 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: serif;
+    font-size: 2.5em;
+    font-weight: bold;
     color: #ffffff;
+
+    background-color: transparent;
+    border-color: #ffffff;
+    border: 2px solid;
+    border-radius: 5px;
+    min-width: 5em;
+    min-height: 2em;
+    
+    text-align: center;
+    vertical-align: middle;
+    transition: 0.3s ease-in-out;
+}
+button:hover
+{
+    background-color: #ffffff;
+    border-color: #ffffff;
+    border: 2px solid;
+    border-radius: 5px;
+    color: black;
 }
