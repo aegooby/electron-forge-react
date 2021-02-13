@@ -8,10 +8,36 @@ import * as jszip from "jszip";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-if (require("electron-squirrel-startup"))
-    Electron.app.quit();
+function squirrel(): void
+{
+    {
+        if (process.platform !== "win32")
+            return;
 
+        const squirrel_command: string = process.argv[1];
+        switch (squirrel_command)
+        {
+            case "--squirrel-install":
+                Electron.app.quit();
+                break;
+            case "--squirrel-updated":
+                Electron.app.quit();
+                break;
+            case '--squirrel-uninstall':
+                Electron.app.quit();
+                break;
+            case '--squirrel-obsolete':
+                Electron.app.quit();
+                break;
+        }
+    }
+}
+
+squirrel();
+
+/** @todo Minor security issue. */
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
 
 const icon_path = path.join(__dirname, "icon.png");
 const icon_image = Electron.nativeImage.createFromPath(icon_path);
