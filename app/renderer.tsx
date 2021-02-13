@@ -7,6 +7,14 @@ import "./index.css";
 
 const hot_loader = ReactHotLoader.hot(module);
 
+class TitleBar extends React.Component
+{
+    render(): JSX.Element
+    {
+        return (<div className="title-bar"></div>);
+    }
+}
+
 class Button extends React.Component
 {
     constructor(props: unknown)
@@ -21,14 +29,6 @@ class Button extends React.Component
     render(): JSX.Element
     {
         return (<button onClick={this.onClick}>run</button>);
-    }
-}
-
-class TitleBar extends React.Component
-{
-    render(): JSX.Element
-    {
-        return (<div className="title-bar"></div>);
     }
 }
 
