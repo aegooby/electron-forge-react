@@ -35,6 +35,8 @@ body
     min-height: 2.4em;
 
     background-color: #202020;
+    
+    z-index: 1;
 }
 
 button 
