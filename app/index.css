@@ -80,7 +80,8 @@ button:active
 
     transition: 0.1s ease-in-out;
 }
-button:focus
+
+*:focus
 {
     outline: none !important;
 }
