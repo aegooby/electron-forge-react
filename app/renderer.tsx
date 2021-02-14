@@ -13,7 +13,7 @@ class TitleBar extends React.Component<{ visible: boolean; }, unknown>
     {
         super(props);
     }
-    render(): JSX.Element
+    render(): React.ReactElement
     {
         if (this.props.visible)
             return <div className="title-bar"></div>;
@@ -37,7 +37,7 @@ class Main extends React.Component<unknown, { fullScreen: boolean; }>
     {
         this.setState({ fullScreen: !this.state.fullScreen });
     }
-    render(): JSX.Element
+    render(): React.ReactElement
     {
         const element =
             <>
