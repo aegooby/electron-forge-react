@@ -17,8 +17,8 @@ function squirrel(): void
         if (process.platform !== "win32")
             return;
 
-        const squirrel_command: string = process.argv[1];
-        switch (squirrel_command)
+        const squirrelCommand: string = process.argv[1];
+        switch (squirrelCommand)
         {
             case "--squirrel-install":
                 Electron.app.quit();
@@ -38,49 +38,49 @@ function squirrel(): void
 
 squirrel();
 
-const icon_path = path.join(__dirname, "icon.png");
-const icon_image = Electron.nativeImage.createFromPath(icon_path);
-icon_image.isMacTemplateImage = true;
-Electron.app.dock.setIcon(icon_image);
+const iconPath = path.join(__dirname, "icon.png");
+const iconImage = Electron.nativeImage.createFromPath(iconPath);
+iconImage.isMacTemplateImage = true;
+Electron.app.dock.setIcon(iconImage);
 
-const extensions_dir = path.join(__dirname, "../../extensions");
-const react_devtools_zip = path.join(extensions_dir, "react-devtools.zip");
-const react_devtools_dir = path.join(extensions_dir, "react-devtools");
+const extensionsDir = path.join(__dirname, "../../extensions");
+const reactDevtoolsZip = path.join(extensionsDir, "react-devtools.zip");
+const reactDevtoolsDir = path.join(extensionsDir, "react-devtools");
 
-async function unzip_devtools(): Promise<void>
+async function unzipDevtools(): Promise<void>
 {
-    const buffer = await fs.promises.readFile(path.resolve(react_devtools_zip));
+    const buffer = await fs.promises.readFile(path.resolve(reactDevtoolsZip));
     const zip = await jszip.loadAsync(buffer);
     const keys = Object.keys(zip.files);
     async function unzip(filename: string): Promise<void>
     {
-        const is_file = !zip.files[filename].dir;
-        const full_path = path.join(extensions_dir, filename);
-        const directory = is_file && path.dirname(full_path) || full_path;
+        const isFile = !zip.files[filename].dir;
+        const fullPath = path.join(extensionsDir, filename);
+        const directory = isFile && path.dirname(fullPath) || fullPath;
         const content = await zip.files[filename].async("nodebuffer");
 
         await fs.promises.mkdir(directory, { recursive: true });
-        if (is_file)
-            await fs.promises.writeFile(full_path, content);
+        if (isFile)
+            await fs.promises.writeFile(fullPath, content);
     }
     await Promise.all(keys.map(unzip));
 }
 
 async function ready(): Promise<void>
 {
-    try { await fs.promises.access(react_devtools_dir); }
-    catch (error) { await unzip_devtools(); }
+    try { await fs.promises.access(reactDevtoolsDir); }
+    catch (error) { await unzipDevtools(); }
     try
     {
-        create_window();
-        await Electron.session.defaultSession.loadExtension(react_devtools_dir);
+        createWindow();
+        await Electron.session.defaultSession.loadExtension(reactDevtoolsDir);
     }
     catch (error) { console.log(error); }
 }
 
-function create_window(): Electron.BrowserWindow
+function createWindow(): Electron.BrowserWindow
 {
-    const window_preferences =
+    const windowPreferences =
     {
         width: 1366,
         height: 768,
@@ -94,33 +94,33 @@ function create_window(): Electron.BrowserWindow
             nodeIntegration: false,
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
         },
-        icon: icon_image,
+        icon: iconImage,
     };
 
-    const main_window = new Electron.BrowserWindow(window_preferences);
-    main_window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-    function full_screen(): void
+    const mainWindow = new Electron.BrowserWindow(windowPreferences);
+    mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    function fullScreen(): void
     {
-        main_window.webContents.send("full-screen");
+        mainWindow.webContents.send("full-screen");
     }
-    main_window.on("enter-full-screen", full_screen);
-    main_window.on("leave-full-screen", full_screen);
+    mainWindow.on("enter-full-screen", fullScreen);
+    mainWindow.on("leave-full-screen", fullScreen);
 
-    return main_window;
+    return mainWindow;
 }
 
 Electron.app.on("ready", ready);
 
-function window_all_closed(): void
+function windowAllClosed(): void
 {
     if (process.platform !== "darwin")
         Electron.app.quit();
 }
-Electron.app.on("window-all-closed", window_all_closed);
+Electron.app.on("window-all-closed", windowAllClosed);
 
 function activate(): void
 {
     if (Electron.BrowserWindow.getAllWindows().length === 0)
-        create_window();
+        createWindow();
 }
 Electron.app.on("activate", activate);
