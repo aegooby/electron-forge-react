@@ -1,15 +1,15 @@
 
 import * as Electron from "electron";
 
-import * as path from "path";
-import * as fs from "fs";
-import * as jszip from "jszip";
-
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 /** @todo Minor security issue. */
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
+import * as path from "path";
+import * as fs from "fs";
+import * as jszip from "jszip";
 
 function squirrel(): void
 {
