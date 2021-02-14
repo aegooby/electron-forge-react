@@ -21,6 +21,16 @@ body
     align-items: center;
 }
 
+.hidden
+{
+    display: none;
+}
+
+*:focus
+{
+    outline: none !important;
+}
+
 .title-bar
 {
     -webkit-app-region: drag !important;
@@ -37,14 +47,4 @@ body
     background-color: #202020;
 
     z-index: 1;
-}
-
-.hidden
-{
-    display: none;
-}
-
-*:focus
-{
-    outline: none !important;
 }
