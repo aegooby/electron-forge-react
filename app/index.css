@@ -35,52 +35,12 @@ body
     min-height: 2.4em;
 
     background-color: #202020;
-    
+
     z-index: 1;
 }
-
-button 
+.hidden
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: serif;
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #ffffff;
-
-    background-color: transparent;
-    border: 2px solid;
-    border-color: #ffffff;
-    border-radius: 5px;
-    min-width: 5em;
-    min-height: 2em;
-    
-    text-align: center;
-    vertical-align: middle;
-
-    transition: 0.2s ease-in-out;
-}
-button:hover
-{
-    color: black;
-
-    background-color: #ffffff;
-    border: 2px solid;
-    border-color: #ffffff;
-    border-radius: 5px;
-
-    transition: 0.2s ease-in-out;
-}
-button:active
-{
-    background-color: #a0a0a0;
-    border: 2px solid;
-    border-color: #a0a0a0;
-    border-radius: 5px;
-
-    transition: 0.1s ease-in-out;
+    display: none;
 }
 
 *:focus
