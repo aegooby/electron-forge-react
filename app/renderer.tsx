@@ -5,7 +5,7 @@ import * as ReactDOM from "react-dom";
 
 import "./index.css";
 
-const hot_loader = ReactHotLoader.hot(module);
+const hotLoader = ReactHotLoader.hot(module);
 
 class TitleBar extends React.Component<{ visible: boolean; }, unknown>
 {
@@ -22,29 +22,29 @@ class TitleBar extends React.Component<{ visible: boolean; }, unknown>
     }
 }
 
-class Main extends React.Component<unknown, { full_screen: boolean; }>
+class Main extends React.Component<unknown, { fullScreen: boolean; }>
 {
     constructor(props: unknown)
     {
         super(props);
-        this.state = { full_screen: false };
+        this.state = { fullScreen: false };
 
         this.onFullScreen = this.onFullScreen.bind(this);
         window.Electron.ipcRenderer.on("full-screen", this.onFullScreen);
     }
     onFullScreen(): void
     {
-        this.setState({ full_screen: !this.state.full_screen });
+        this.setState({ fullScreen: !this.state.fullScreen });
     }
     render(): JSX.Element
     {
         const element =
             <>
-                <TitleBar visible={!this.state.full_screen} />
+                <TitleBar visible={!this.state.fullScreen} />
             </>;
         return element;
     }
 }
 
-export default hot_loader(Main);
+export default hotLoader(Main);
 ReactDOM.render(<Main />, document.querySelector("#root"));
