@@ -80,7 +80,7 @@ async function ready(): Promise<void>
 
 function createWindow(): Electron.BrowserWindow
 {
-    const windowPreferences =
+    const windowPreferences: Electron.BrowserWindowConstructorOptions =
     {
         width: 1366,
         height: 768,
