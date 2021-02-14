@@ -7,39 +7,44 @@ import "./index.css";
 
 const hot_loader = ReactHotLoader.hot(module);
 
-class TitleBar extends React.Component
+class TitleBar extends React.Component<{ visible: boolean; }, unknown>
 {
+    constructor(props: { visible: boolean; })
+    {
+        super(props);
+    }
     render(): JSX.Element
     {
-        return (<div className="title-bar"></div>);
+        if (this.props.visible)
+            return <div className="title-bar"></div>;
+        else
+            return <div className="title-bar hidden"></div>;
     }
 }
 
-class Button extends React.Component
+class Main extends React.Component<unknown, { full_screen: boolean; }>
 {
     constructor(props: unknown)
     {
         super(props);
-        this.onClick = this.onClick.bind(this);
-    }
-    onClick(): void
-    {
-        window.Electron.ipcRenderer.send("button");
-    }
-    render(): JSX.Element
-    {
-        return (<button onClick={this.onClick}>run</button>);
-    }
-}
+        this.state = { full_screen: false };
 
-class Main extends React.Component
-{
+        this.onFullScreen = this.onFullScreen.bind(this);
+        window.Electron.ipcRenderer.on("full-screen", this.onFullScreen);
+    }
+    onFullScreen(): void
+    {
+        this.setState({ full_screen: !this.state.full_screen });
+    }
     render(): JSX.Element
     {
-        return (<><TitleBar /><Button /></>);
+        const element =
+            <>
+                <TitleBar visible={!this.state.full_screen} />
+            </>;
+        return element;
     }
 }
 
 export default hot_loader(Main);
-
 ReactDOM.render(<Main />, document.querySelector("#root"));
