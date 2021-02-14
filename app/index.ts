@@ -79,7 +79,7 @@ async function ready(): Promise<void>
     catch (error) { console.log(error); }
 }
 
-function create_window(): void
+function create_window(): Electron.BrowserWindow
 {
     const window_preferences =
     {
@@ -100,6 +100,14 @@ function create_window(): void
 
     const main_window = new Electron.BrowserWindow(window_preferences);
     main_window.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+    function full_screen(): void
+    {
+        main_window.webContents.send("full-screen");
+    }
+    main_window.on("enter-full-screen", full_screen);
+    main_window.on("leave-full-screen", full_screen);
+
+    return main_window;
 }
 
 Electron.app.on("ready", ready);
@@ -117,9 +125,3 @@ function activate(): void
         create_window();
 }
 Electron.app.on("activate", activate);
-
-async function button(): Promise<void>
-{
-    console.log("Click!");
-}
-Electron.ipcMain.on("button", button);
