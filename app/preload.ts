@@ -15,6 +15,10 @@ const ElectronAPI: Record<string, unknown> =
                 callback(...args);
             }
             return Electron.ipcRenderer.on(channel, __callback);
+        },
+        removeAllListeners: function (channel: string): Electron.IpcRenderer
+        {
+            return Electron.ipcRenderer.removeAllListeners(channel);
         }
     }
 };
