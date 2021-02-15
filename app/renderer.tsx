@@ -57,7 +57,7 @@ class Main extends React.Component<unknown, { fullScreen: boolean; }>
 
     render(): React.ReactElement
     {
-        const element = <NetworkInterface />;
+        const element = <><TitleBar /></>;
         return element;
     }
 }
