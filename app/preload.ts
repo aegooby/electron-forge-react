@@ -10,10 +10,6 @@ const ElectronAPI: Record<string, unknown> =
         },
         on: function (channel: string, callback: (event: Electron.IpcRendererEvent, ...args: unknown[]) => void): Electron.IpcRenderer
         {
-            // function __callback(event: Electron.IpcRendererEvent, ...args: unknown[]): void
-            // {
-            //     callback(...args);
-            // }
             return Electron.ipcRenderer.on(channel, callback);
         },
         removeAllListeners: function (channel: string): Electron.IpcRenderer
