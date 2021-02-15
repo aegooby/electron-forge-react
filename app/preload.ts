@@ -22,4 +22,4 @@ const ElectronAPI: Record<string, unknown> =
         }
     }
 };
-Electron.contextBridge.exposeInMainWorld("ElectronAPI", ElectronAPI);
+Electron.contextBridge.exposeInMainWorld("Electron", ElectronAPI);
