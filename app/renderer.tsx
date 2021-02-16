@@ -5,8 +5,6 @@ import * as ReactDOM from "react-dom";
 
 import "./index.css";
 
-const hotLoader = ReactHotLoader.hot(module);
-
 class TitleBar extends React.Component<{ visible: boolean; }, unknown>
 {
     constructor(props: { visible: boolean; })
@@ -47,5 +45,7 @@ class Main extends React.Component<unknown, { fullScreen: boolean; }>
     }
 }
 
+const hotLoader = ReactHotLoader.hot(module);
 export default hotLoader(Main);
+
 ReactDOM.render(<Main />, document.querySelector("#root"));
