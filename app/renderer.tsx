@@ -1,4 +1,5 @@
 
+/** @todo Replace with react-refresh-webpack-plugin */
 import * as ReactHotLoader from "react-hot-loader";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
