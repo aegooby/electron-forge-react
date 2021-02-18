@@ -1,10 +1,7 @@
 
 import * as React from "react";
 
-interface Props
-{
-    visible: boolean;
-}
+interface Props { visible: boolean; }
 
 export class TitleBar extends React.Component<Props, unknown>
 {
