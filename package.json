@@ -1,6 +1,6 @@
 {
-    "name": "__name__",
-    "productName": "__name__",
+    "name": "electron-forge-react",
+    "productName": "electron-forge-react",
     "version": "1.0.0",
     "description": "My Electron application description",
     "main": ".webpack/main",
@@ -27,7 +27,7 @@
                 {
                     "name": "@electron-forge/maker-squirrel",
                     "config": {
-                        "name": "__name__"
+                        "name": "electron-forge-react"
                     }
                 },
                 {
@@ -80,12 +80,13 @@
         "@types/react": "^17.0.1",
         "@types/react-dom": "^17.0.0",
         "@typescript-eslint/eslint-plugin": "^4.0.1",
-        "@typescript-eslint/parser": "^4.0.1",
+        "@typescript-eslint/parser": "^4.15.1",
         "css-loader": "^4.2.1",
         "electron": "11.2.3",
         "electron-devtools-installer": "^3.1.1",
         "eslint": "^7.6.0",
-        "eslint-plugin-import": "^2.20.0",
+        "eslint-import-resolver-typescript": "^2.4.0",
+        "eslint-plugin-import": "^2.22.1",
         "fork-ts-checker-webpack-plugin": "^5.0.14",
         "jszip": "^3.6.0-0",
         "node-loader": "^1.0.1",
