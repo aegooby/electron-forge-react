@@ -5,20 +5,7 @@ import * as ReactDOM from "react-dom";
 
 import "./index.css";
 
-class TitleBar extends React.Component<{ visible: boolean; }, unknown>
-{
-    constructor(props: { visible: boolean; })
-    {
-        super(props);
-    }
-    render(): React.ReactElement
-    {
-        if (this.props.visible)
-            return <div className="title-bar"></div>;
-        else
-            return <div className="title-bar hidden"></div>;
-    }
-}
+import { TitleBar } from "./components/TitleBar";
 
 class Main extends React.Component<unknown, { fullScreen: boolean; }>
 {
