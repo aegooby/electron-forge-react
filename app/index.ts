@@ -37,8 +37,11 @@ squirrel();
 
 const iconPath = path.join(__dirname, "icon.png");
 const iconImage = Electron.nativeImage.createFromPath(iconPath);
-iconImage.isMacTemplateImage = true;
-Electron.app.dock.setIcon(iconImage);
+if (process.platform === "darwin")
+{
+    iconImage.isMacTemplateImage = true;
+    Electron.app.dock.setIcon(iconImage);
+}
 
 const extensionsDir = path.join(__dirname, "../../extensions");
 const reactDevtoolsZip = path.join(extensionsDir, "react-devtools.zip");
