@@ -26,8 +26,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
-    - run: yarn setup
     - run: yarn install
-    - run: yarn --cwd engine install
-    - run: yarn build
     - run: yarn start
