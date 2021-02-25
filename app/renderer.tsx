@@ -8,7 +8,12 @@ import "./index.css";
 
 import { TitleBar } from "./components/TitleBar";
 
-class Main extends React.Component<unknown, { fullScreen: boolean; }>
+interface State
+{
+    fullScreen: boolean;
+}
+
+class Main extends React.Component<unknown, State>
 {
     constructor(props: unknown)
     {
